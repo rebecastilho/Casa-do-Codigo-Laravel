@@ -21,6 +21,7 @@
                         <td> {{ $p-> descricao}} </td>
                         <td> {{ $p-> quantidade}} </td>
                         <td><a href="/produtos/mostra/{{$p->id}}">Visualizar</a></td>
+                        <td><a href="{{url('produtos/remove',$p->id)}}">Deletar</a></td>
                     </tr>
                 @endforeach
             </table>

@@ -2,37 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use\App\Produto;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProdutosController extends Controller
 {
     public function lista(){
-        $produtos = DB::select('select * from produtos');
-        return view('produto.listagem')->with('produtos' , $produtos);
+        $produtos = Produto::all();
+        return view('produto.listagem')->with('produtos', $produtos);
+
     }
 
-    public function mostra(){
+    public function listaJson(){
+        $produtos = Produto::all();
+        return response()->json($produtos);
+    }
 
-        $idProduto = Request::route('id');
-        $resultado =  DB::table('produtos')->where('id', $idProduto)->get();
-        
-        if(empty($resultado[0])) {
+
+    public function mostra($id){
+        $produto = Produto::find($id);
+        if(empty($produto)) {
             return "Esse produto não existe";
         }
-
-        return view('produto.detalhes')->with('p',$resultado[0]);
+        return view('produto.detalhes')->with('p', $produto);
     }
 
     public function novo(){
-        return view('produto.formulario');
+        return view('produto.novo');
     }
 
     public function adiciona(){
-        $dados = Request::except('_token');
-        DB::table('produtos')->insert(
-            [$dados]
-        );
+        Produto::create(Request::all());
         return redirect('/produtos')->withInput(Request::only('nome'));
     }
+
+    public function remove($id){
+        $produto = Produto::find($id);
+        $produto->delete();
+
+        return redirect('/produtos');
+    }
+
 }
