@@ -1,0 +1,19 @@
+.nav li a {
+  padding: 1em;
+}
+
+.nav li a:hover {
+  background-color: #344f65;
+  text-decoration: none;
+}
+nav.navbar.navbar-default{
+    background-color: #337ab7;
+    margin-bottom:5%;
+}
+
+nav.navbar.navbar-default a {
+    color: white;
+}
+li p.navbar-text, a.navbar-brand {
+    color: white!important ;
+}
