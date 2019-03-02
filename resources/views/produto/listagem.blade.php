@@ -22,6 +22,7 @@
                         <td> {{ $p-> quantidade}} </td>
                         <td><a href="/produtos/mostra/{{$p->id}}">Visualizar</a></td>
                         <td><a href="{{url('produtos/remove',$p->id)}}">Deletar</a></td>
+                        <td><a href="{{url('produtos/altera',$p->id)}}">Alterar</a></td>
                     </tr>
                 @endforeach
             </table>

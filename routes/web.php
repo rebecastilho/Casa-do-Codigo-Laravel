@@ -24,3 +24,8 @@ Route::get('/produtos/remove/{id}','ProdutosController@remove')->where('id','[0-
 Route::get('/produtos/novo','ProdutosController@novo');
 
 Route::post('/produtos/adiciona','ProdutosController@adiciona');
+
+Route::get('/produtos/altera/{id}', 'ProdutosController@altera')->where('id','[0-9]+');
+
+
+Route::post('/produtos/alterado', 'ProdutosController@alterado');

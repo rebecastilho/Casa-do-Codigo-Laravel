@@ -44,4 +44,19 @@ class ProdutosController extends Controller
         return redirect('/produtos');
     }
 
+    public function altera($id){
+        return view('produto.alterar')->with('produto',Produto::find($id));
+    }
+
+    public function alterado(){
+        $produto = Produto::find(Request::input('id'));
+        $produto->nome = Request::input('nome');
+        $produto->descricao = Request::input('descricao');
+        $produto->valor = Request::input('valor');
+        $produto->quantidade = Request::input('quantidade');
+        
+        $produto->save();
+        return  redirect('/produtos');
+    }
+
 }
