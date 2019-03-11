@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/produtos','ProdutosController@lista');
@@ -27,5 +27,9 @@ Route::post('/produtos/adiciona','ProdutosController@adiciona');
 
 Route::get('/produtos/altera/{id}', 'ProdutosController@altera')->where('id','[0-9]+');
 
+Route::post('/produtos/alterado/{id}', 'ProdutosController@alterado')->where('id','[0-9]+');
 
-Route::post('/produtos/alterado', 'ProdutosController@alterado');
+Route::get('home', 'HomeController@index')->middleware('auth');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

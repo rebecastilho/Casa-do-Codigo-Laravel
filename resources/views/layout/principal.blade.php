@@ -16,12 +16,26 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="{{url('produtos')}}">Estoque Laravel</a>
             </div>
-            
-            <ul class="nav navbar-right">
-                <li><a href="{{url('produtos')}}">Listagem</a></li>
-                <li><a href="{{url('produtos/novo')}}">Novo</a></li>
-            </ul>
-           
+            @guest
+                @if(Route::has('register'))
+                    <ul class = "nav navbar-right">
+                        <li><a href="{{ route('login') }}"> Login </a></li>
+                        <li><a href="{{ route('register') }}"> Registrar </a></li>
+                    </ul>
+                @endif
+                @else
+                <ul class="nav navbar-right">
+                    <li><a href="{{url('produtos')}}">Listagem</a></li>
+                    <li><a href="{{url('produtos/novo')}}">Novo</a></li>
+                    <li><a href = "{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit(); ">Logout </a></li>
+                    
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                     
+                </ul>
+            @endguest
+            </div>
         </nav>
     </header>
     

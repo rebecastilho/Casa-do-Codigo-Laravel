@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use\App\Produto;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
+use \App\Http\Requests\ProdutosRequest;
 
 class ProdutosController extends Controller
 {
@@ -32,9 +33,9 @@ class ProdutosController extends Controller
         return view('produto.novo');
     }
 
-    public function adiciona(){
-        Produto::create(Request::all());
-        return redirect('/produtos')->withInput(Request::only('nome'));
+    public function adiciona(ProdutosRequest $request){
+        Produto::create($request->all());
+        return redirect()->action('ProdutosController@lista')->withInput(Request::only('nome'));
     }
 
     public function remove($id){
@@ -48,15 +49,15 @@ class ProdutosController extends Controller
         return view('produto.alterar')->with('produto',Produto::find($id));
     }
 
-    public function alterado(){
-        $produto = Produto::find(Request::input('id'));
+    public function alterado($id){
+        $produto = Produto::find($id);
         $produto->nome = Request::input('nome');
         $produto->descricao = Request::input('descricao');
         $produto->valor = Request::input('valor');
         $produto->quantidade = Request::input('quantidade');
-        
+
         $produto->save();
-        return  redirect('/produtos');
+        return redirect()->action('ProdutosController@lista');
     }
 
 }

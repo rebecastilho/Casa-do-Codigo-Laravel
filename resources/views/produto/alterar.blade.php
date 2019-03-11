@@ -1,11 +1,8 @@
 @extends('layout.principal')
 @section('conteudo')
     <h1>Alterar Produto</h1>
-       <form action='/produtos/alterado' method='post'>
+       <form action='/produtos/alterado/{{$produto->id}}' method='post'>
             
-            <div class="form-group">
-                <input type="hidden" value={{$produto->id}} name="id" class="form-control">
-            </div>
 
             <div class="form-group">
                 <label>Nome</label> <input value={{$produto->nome}} name="nome" class="form-control">
